@@ -12,7 +12,7 @@ def customizePom(pom, gradleProject) {
 		generatedPom.project {
 			name = gradleProject.description
 			description = gradleProject.description
-			url = "https://github.com/spring-projects/spring-restdocs"
+			url = "https://github.com/tobiashochguertel/spring-restdocs"
 			organization {
 				name = "Spring IO"
 				url = "http://projects.spring.io/spring-restdocs"
@@ -25,9 +25,9 @@ def customizePom(pom, gradleProject) {
 				}
 			}
 			scm {
-				url = "https://github.com/spring-projects/spring-restdocs"
-				connection = "scm:git:git://github.com/spring-projects/spring-restdocs"
-				developerConnection = "scm:git:git://github.com/spring-projects/spring-restdocs"
+				url = "https://github.com/tobiashochguertel/spring-restdocs.git"
+				connection = "scm:git:git://github.com/tobiashochguertel/spring-restdocs"
+				developerConnection = "scm:git:git://github.com/tobiashochguertel/spring-restdocs"
 			}
 			developers {
 				developer {
@@ -35,10 +35,15 @@ def customizePom(pom, gradleProject) {
 					name = "Andy Wilkinson"
 					email = "awilkinson@pivotal.io"
 				}
+				developer {
+					id = "thochguertel"
+					name = "Tobias Hochgürtel"
+					email = "tobias.hochguertel@googmail.com"
+				}
 			}
 			issueManagement {
 				system = "GitHub"
-				url = "https://github.com/spring-projects/spring-restdocs/issues"
+				url = "https://github.com/tobiashochguertel/spring-restdocs/issues"
 			}
 		}
 	}

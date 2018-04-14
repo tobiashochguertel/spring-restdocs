@@ -30,12 +30,21 @@ import java.util.Map;
  * @author Andy Wilkinson
  */
 class SnippetsDirectoryResolver {
-
+	
 	File getSnippetsDirectory(Map<String, Object> attributes) {
+		if (System.getProperty("restdocs.asciidoctor.snippets") != null) {
+			return getCustomSnippetsDirectory(attributes);
+		}
 		if (System.getProperty("maven.home") != null) {
 			return getMavenSnippetsDirectory(attributes);
 		}
 		return getGradleSnippetsDirectory(attributes);
+	}
+
+	private File getCustomSnippetsDirectory(Map<String, Object> attributes) {
+		Path docdir = Paths.get(getRequiredAttribute(attributes, "docdir"));
+		return new File(docdir.relativize(findPom(docdir).getParent()).toFile(),
+		                System.getProperty("restdocs.asciidoctor.snippets"));
 	}
 
 	private File getMavenSnippetsDirectory(Map<String, Object> attributes) {

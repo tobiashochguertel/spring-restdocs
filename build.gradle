@@ -1,5 +1,6 @@
 buildscript {
 	repositories {
+		mavenLocal()
 		mavenCentral()
 		maven { url 'https://repo.spring.io/plugins-snapshot' }
 		maven { url 'https://repo.spring.io/plugins-release' }
@@ -13,8 +14,9 @@ buildscript {
 }
 
 allprojects {
-	group = 'org.springframework.restdocs'
+	group = 'io.github.tobiashochguertel.restdocs'
 	repositories {
+		mavenLocal()
 		mavenCentral()
 	}
 }
@@ -36,10 +38,10 @@ sonarqube {
 ext {
 	springVersion = '5.0.5.RELEASE'
 	javadocLinks = [
-		'http://docs.oracle.com/javase/8/docs/api/',
-		"http://docs.spring.io/spring-framework/docs/$springVersion/javadoc-api/",
-		'https://docs.jboss.org/hibernate/stable/beanvalidation/api/',
-		'https://docs.jboss.org/hibernate/stable/validator/api/'
+			'http://docs.oracle.com/javase/8/docs/api/',
+			"http://docs.spring.io/spring-framework/docs/$springVersion/javadoc-api/",
+			'https://docs.jboss.org/hibernate/stable/beanvalidation/api/',
+			'https://docs.jboss.org/hibernate/stable/validator/api/'
 	] as String[]
 }
 
@@ -99,7 +101,7 @@ subprojects {
 	}
 
 	compileJava {
-		options.compilerArgs = [ '-Xlint:deprecation', '-Xlint:-options', '-Werror' ]
+		options.compilerArgs = ['-Xlint:deprecation', '-Xlint:-options', '-Werror']
 	}
 
 }
@@ -113,6 +115,7 @@ configure(subprojects - project(":docs")) { subproject ->
 		apply plugin: 'spring-io'
 
 		repositories {
+			mavenLocal()
 			maven { url "https://repo.spring.io/libs-snapshot" }
 		}
 
@@ -127,7 +130,7 @@ configure(subprojects - project(":docs")) { subproject ->
 
 	checkstyle {
 		configFile = rootProject.file('config/checkstyle/checkstyle.xml')
-		configProperties = [ 'checkstyle.config.dir' : rootProject.file('config/checkstyle') ]
+		configProperties = ['checkstyle.config.dir': rootProject.file('config/checkstyle')]
 		toolVersion = '6.10.1'
 	}
 
@@ -207,7 +210,7 @@ samples {
 
 }
 
-task api (type: Javadoc) {
+task api(type: Javadoc) {
 	group = "Documentation"
 	description = "Generates aggregated Javadoc API documentation."
 	dependsOn {
